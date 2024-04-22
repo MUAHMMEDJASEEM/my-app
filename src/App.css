@@ -1,10 +1,13 @@
 .container {
   text-align: center;
-  background-color: #c1c1c1;
+  background-color: #ADC4CE;
 }
-body{
-  background-color: #d3d3d3;
+
+body {
+  background-color: #ADC4CE;
+  color: #4b4848;
 }
+
 select {
   margin: 10px;
 }
@@ -40,8 +43,9 @@ button {
   margin-bottom: 10px;
   width: 300px;
   text-align: center;
-  background-color: #c5bcbc;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  background-color: #EEE0C9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow */
 }
 
 .transition-card h3 {
@@ -75,9 +79,9 @@ button {
 }
 
 .navbar {
-  background-color: #d3cbcb;
+  background-color: #96B6C5;
   /* Change the background color as needed */
-  color: #6c6a6a;
+  color: #656562;
   /* Change the text color as needed */
 
   /* Adjust padding as needed */
@@ -97,10 +101,13 @@ button {
 
 /* Add additional styling as needed */
 button:hover {
-  background-color: #0056b3; /* Darker shade of blue */
+  background-color: #0056b3;
+  /* Darker shade of blue */
 }
 
 .navbar h1 {
-  font-size: 24px; /* Increase font size */
-  font-weight: bold; /* Make text bold */
+  font-size: 24px;
+  /* Increase font size */
+  font-weight: bold;
+  /* Make text bold */
 }
