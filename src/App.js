@@ -3,8 +3,8 @@ import './App.css'; // Import the CSS file for styling
 
 // Distance matrix representing the distances between locations (in km)
 const DistanceMatrix = [
-  [0, 0, 4, 14, 21, 4, 10, 17],
-  [0, 0, 4, 14, 21, 4, 10, 17],
+  [0, 1, 4, 14, 21, 4, 10, 17],
+  [1, 0, 4, 14, 21, 4, 10, 17],
   [4, 4, 0, 10, 21, 2, 7, 13],
   [14, 14, 10, 0, 27, 10, 10, 8],
   [21, 21, 21, 27, 0, 21, 20, 26],
@@ -94,7 +94,7 @@ const App = () => {
       formattedPath.push(
         <div key={i} className="transition-card">
           <h3>{location}</h3>
-           <div className="tt" style={{ position: 'relative' }}>
+          <div className="tt" style={{ position: 'relative' }}>
 
             <img
               src={`${process.env.PUBLIC_URL}/${location}.jpg`} // Use backticks for string interpolation
@@ -103,11 +103,11 @@ const App = () => {
             />
 
           </div>
-          
+
           <p>Next: {nextLocation}</p>
           <p>Distance: {calculateTotalDistance([path[i], path[i + 1]]) || 0} km</p>
 
-         
+
         </div>
       );
     }
@@ -126,10 +126,10 @@ const App = () => {
           <option key={index} value={location}>{location}</option>
         ))}
       </select>
-      <br/>
+      <br />
       No of locations need to visit
       <select value={numPlacesToVisit} onChange={(e) => setNumPlacesToVisit(parseInt(e.target.value))}>
-        {[1, 2, 3, 4, 5, 6, 7,8].map((num, index) => (
+        {[1, 2, 3, 4, 5, 6, 7, 8].map((num, index) => (
           <option key={index} value={num}>{num}</option>
         ))}
       </select>
