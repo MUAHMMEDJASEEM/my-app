@@ -116,7 +116,7 @@ const App = () => {
   return (
     <div>
       <nav className="navbar">
-        <h1>                  Path Planner</h1>
+        <h1>Path Planner</h1>
       </nav>
       <div className="container">
         <div>
