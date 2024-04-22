@@ -92,54 +92,57 @@ const App = () => {
       const nextLocation = locations[path[i + 1]] || 'Its Final Destination';
 
       formattedPath.push(
-        <div key={i} className="transition-card">
-          <h3>{location}</h3>
-          <div className="tt" style={{ position: 'relative' }}>
-
-            <img
-              src={`${process.env.PUBLIC_URL}/${location}.jpg`} // Use backticks for string interpolation
-              alt={location}
-              className="location-image"
-            />
-
+        <div>
+          <div key={i} className="transition-card">
+            <h3>{location}</h3>
+            <div className="tt" style={{ position: 'relative' }}>
+              <img
+                src={`${process.env.PUBLIC_URL}/${location}.jpg`} // Use backticks for string interpolation
+                alt={location}
+                className="location-image"
+              />
+            </div></div>
+          <div key={i} className="transition-card">
+            <p>Next: {nextLocation}</p>
+            <p>Distance: {calculateTotalDistance([path[i], path[i + 1]]) || 0} km</p>
           </div>
-
-          <p>Next: {nextLocation}</p>
-          <p>Distance: {calculateTotalDistance([path[i], path[i + 1]]) || 0} km</p>
-
-
         </div>
       );
     }
 
-
     return formattedPath;
   };
 
-
   return (
-    <div className="container">
-      Select a location
-      <select value={selectedLocation} onChange={(e) => setSelectedLocation(e.target.value)}>
-        <option value="">Select a location</option>
-        {locations.map((location, index) => (
-          <option key={index} value={location}>{location}</option>
-        ))}
-      </select>
-      <br />
-      No of locations need to visit
-      <select value={numPlacesToVisit} onChange={(e) => setNumPlacesToVisit(parseInt(e.target.value))}>
-        {[1, 2, 3, 4, 5, 6, 7, 8].map((num, index) => (
-          <option key={index} value={num}>{num}</option>
-        ))}
-      </select>
-      <button onClick={findShortestPath}>Find Best Path</button>
-      {shortestPath.length > 0 && (
-        <div className="path-container">
-          <h2>Best Path from {selectedLocation}:</h2>
-          <div className="path">{formatPathDescription(shortestPath)}</div>
+    <div>
+      <nav className="navbar">
+        <h1>                  Path Planner</h1>
+      </nav>
+      <div className="container">
+        <div>
+          Select a location
+          <select value={selectedLocation} onChange={(e) => setSelectedLocation(e.target.value)}>
+            <option value="">Select a location</option>
+            {locations.map((location, index) => (
+              <option key={index} value={location}>{location}</option>
+            ))}
+          </select>
+          <br />
+          No of locations need to visit
+          <select value={numPlacesToVisit} onChange={(e) => setNumPlacesToVisit(parseInt(e.target.value))}>
+            {[1, 2, 3, 4, 5, 6, 7, 8].map((num, index) => (
+              <option key={index} value={num}>{num}</option>
+            ))}
+          </select>
+          <button onClick={findShortestPath}>Find Best Path</button>
+          {shortestPath.length > 0 && (
+            <div className="path-container">
+              <h2>Best Path from {selectedLocation}:</h2>
+              <div className="path">{formatPathDescription(shortestPath)}</div>
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };

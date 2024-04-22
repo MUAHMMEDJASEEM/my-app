@@ -50,7 +50,8 @@ button {
 
 .tt {
   visibility: visible;
-
+  transition: transform 0.5s;
+  /* Add transition effect for scaling down */
 }
 
 .tt:hover {
@@ -68,3 +69,26 @@ button {
   margin-bottom: 100;
 
 }
+
+.navbar {
+  background-color: #d3cbcb;
+  /* Change the background color as needed */
+  color: #6c6a6a;
+  /* Change the text color as needed */
+  padding: 10px 20px;
+  /* Adjust padding as needed */
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  /* Ensure it's above other content */
+  text-align: center;
+}
+
+.container {
+  margin-top: 90px;
+  /* Adjust margin to avoid content being hidden under the navbar */
+}
+
+/* Add additional styling as needed */
