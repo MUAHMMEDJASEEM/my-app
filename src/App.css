@@ -1,7 +1,10 @@
 .container {
   text-align: center;
+  background-color: #c1c1c1;
 }
-
+body{
+  background-color: #d3d3d3;
+}
 select {
   margin: 10px;
 }
@@ -32,12 +35,13 @@ button {
   margin-right: auto;
   border: 1px solid #ccc;
   border-radius: 4px;
-  padding: 10px;
+  padding: 20px;
   margin-top: 10px;
   margin-bottom: 10px;
   width: 300px;
   text-align: center;
-  background-color: #f9f9f9;
+  background-color: #c5bcbc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 .transition-card h3 {
@@ -87,8 +91,16 @@ button {
 }
 
 .container {
-  margin-top: 90px;
+  margin-top: 70px;
   /* Adjust margin to avoid content being hidden under the navbar */
 }
 
 /* Add additional styling as needed */
+button:hover {
+  background-color: #0056b3; /* Darker shade of blue */
+}
+
+.navbar h1 {
+  font-size: 24px; /* Increase font size */
+  font-weight: bold; /* Make text bold */
+}
