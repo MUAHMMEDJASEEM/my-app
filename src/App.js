@@ -85,33 +85,44 @@ const App = () => {
   };
 
   // Function to format the output in the desired narrative-like format
-  const formatPathDescription = (path) => {
-    const formattedPath = [];
-    for (let i = 0; i < path.length; i++) {
-      const location = locations[path[i]];
-      const nextLocation = locations[path[i + 1]] || 'Its Final Destination';
+ // Function to format the output in the desired narrative-like format
+// Function to format the output in the desired narrative-like format
+const formatPathDescription = (path) => {
+  const formattedPath = [];
+  const averageSpeed = 25; // Average speed in km/h
 
-      formattedPath.push(
-        <div>
-          <div key={i} className="transition-card">
-            <h3>{location}</h3>
-            <div className="tt" style={{ position: 'relative' }}>
-              <img
-                src={`${process.env.PUBLIC_URL}/${location}.jpg`} // Use backticks for string interpolation
-                alt={location}
-                className="location-image"
-              />
-            </div></div>
-          <div key={i} className="transition-card">
-            <p>Next: {nextLocation}</p>
-            <p>Distance: {calculateTotalDistance([path[i], path[i + 1]]) || 0} km</p>
+  for (let i = 0; i < path.length; i++) {
+    const location = locations[path[i]];
+    const nextLocation = locations[path[i + 1]] || 'Its Final Destination';
+    const distance = calculateTotalDistance([path[i], path[i + 1]]) || 0;
+    const timeInHours = distance / averageSpeed;
+    const timeInMinutes = timeInHours * 60; // Convert hours to minutes
+
+    formattedPath.push(
+      <div>
+        <div key={i} className="transition-card">
+          <h3>{location}</h3>
+          <div className="tt" style={{ position: 'relative' }}>
+            <img
+              src={`${process.env.PUBLIC_URL}/${location}.jpg`} // Use backticks for string interpolation
+              alt={location}
+              className="location-image"
+            />
           </div>
         </div>
-      );
-    }
+        <div key={i} className="transition-card">
+          <p>Next: {nextLocation}</p>
+          <p>Distance: {distance} km</p>
+          <p>Approx. Time: {timeInMinutes.toFixed(0)} mins</p> {/* Display time in minutes */}
+        </div>
+      </div>
+    );
+  }
 
-    return formattedPath;
-  };
+  return formattedPath;
+};
+
+
 
   return (
     <div>
