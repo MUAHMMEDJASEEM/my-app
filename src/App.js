@@ -113,7 +113,7 @@ const formatPathDescription = (path) => {
         <div key={i} className="transition-card">
           <p>Next: {nextLocation}</p>
           <p>Distance: {distance} km</p>
-          <p>Approx. Time: {timeInMinutes.toFixed(0)} mins</p> {/* Display time in minutes */}
+          <p>Approx.Travel Time: {timeInMinutes.toFixed(0)} mins</p> {/* Display time in minutes */}
         </div>
       </div>
     );
