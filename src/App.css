@@ -126,7 +126,7 @@ button {
 }
 
 .navbar {
-  background-color: #aeafbd;
+  background-color: rgba(255, 255, 255, 0.45); ;
   color: #4e5556;
   position: fixed;
   width: 100%;
@@ -134,6 +134,7 @@ button {
   left: 0;
   z-index: 1000;
   text-align: center;
+  backdrop-filter: blur(15px);
 }
 
 .navbar h1 {
@@ -142,5 +143,5 @@ button {
 }
 
 .container {
-  margin-top: 90px;
+  margin-top: 60px;
 }
