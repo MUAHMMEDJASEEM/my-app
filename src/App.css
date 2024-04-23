@@ -1,16 +1,64 @@
-.container {
-  text-align: center;
-  background-color: #ADC4CE;
+:root {
+  font-size: 20px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+p {
+  margin: 0;
+}
+
+p:not(:last-child) {
+  margin-bottom: 1.5em;
 }
 
 body {
-  background-color: #ADC4CE;
-  color: #4b4848;
+  font: 1em/1.618 Inter, sans-serif;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  min-height: 100vh;
+  padding: 30px;
+  margin: 0;
+  
+  color: #224;
+  background:
+    url(https://source.unsplash.com/E8Ufcyxz514/2400x1823)
+    center / cover no-repeat fixed;
+}
+
+.container {
+  text-align: center;
+  
 }
 
 select {
   margin: 10px;
+  padding: 8px 16px;
+  font-size: 16px; /* Adjust font size as needed */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff; /* Set background color */
+  color: #333; /* Set text color */
+  cursor: pointer;
+  outline: none; /* Remove default outline */
 }
+
+/* Style for the dropdown arrow */
+select::-ms-expand {
+  display: none; /* Remove the default arrow in IE */
+}
+
+select option {
+  padding: 8px 16px; /* Adjust option padding as needed */
+}
+
 
 button {
   margin: 10px;
@@ -24,12 +72,16 @@ button {
 
 .path-container {
   margin-top: 20px;
+  padding: 20px;
+  background-color: transparent;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
 }
 
 .path {
   display: block;
   margin-left: auto;
-
 }
 
 .transition-card {
@@ -38,14 +90,14 @@ button {
   margin-right: auto;
   border: 1px solid #ccc;
   border-radius: 4px;
-  padding: 20px;
+  padding: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
   width: 300px;
   text-align: center;
-  background-color: #EEE0C9;
+  background-color: rgba(255, 255, 255, 0.45);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  /* Subtle shadow */
+  backdrop-filter: blur(15px);
 }
 
 .transition-card h3 {
@@ -59,55 +111,36 @@ button {
 .tt {
   visibility: visible;
   transition: transform 0.5s;
-  /* Add transition effect for scaling down */
 }
 
 .tt:hover {
   visibility: visible;
   transform: scale(1.2);
-  /* Increase the size of the image */
   transition: transform 0.3s ease;
-  /* Add transition effect */
 }
-
 
 .location-image {
   width: 200px;
   text-align: center;
   margin-bottom: 100;
-
 }
 
 .navbar {
-  background-color: #96B6C5;
-  /* Change the background color as needed */
-  color: #656562;
-  /* Change the text color as needed */
-
-  /* Adjust padding as needed */
+  background-color: #aeafbd;
+  color: #4e5556;
   position: fixed;
   width: 100%;
   top: 0;
   left: 0;
   z-index: 1000;
-  /* Ensure it's above other content */
   text-align: center;
-}
-
-.container {
-  margin-top: 70px;
-  /* Adjust margin to avoid content being hidden under the navbar */
-}
-
-/* Add additional styling as needed */
-button:hover {
-  background-color: #0056b3;
-  /* Darker shade of blue */
 }
 
 .navbar h1 {
   font-size: 24px;
-  /* Increase font size */
   font-weight: bold;
-  /* Make text bold */
+}
+
+.container {
+  margin-top: 90px;
 }
