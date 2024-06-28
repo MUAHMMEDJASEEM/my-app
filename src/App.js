@@ -51,16 +51,20 @@ const permute = (arr) => {
 };
 
 const App = () => {
-  const [selectedLocation, setSelectedLocation] = useState('');
-  const [numPlacesToVisit, setNumPlacesToVisit] = useState(3); // Default to 3 places
+  const [selectedLocations, setSelectedLocations] = useState([]);
   const [shortestPath, setShortestPath] = useState([]);
 
+  const handleLocationClick = (location) => {
+    setSelectedLocations((prev) =>
+      prev.includes(location) ? prev.filter((loc) => loc !== location) : [...prev, location]
+    );
+  };
+
   const findShortestPath = () => {
-    const startingLocationIndex = locations.indexOf(selectedLocation);
-    if (startingLocationIndex !== -1) {
-      // Generate all permutations of locations except the starting location
-      const permutationIndices = [...Array(locations.length).keys()].filter(index => index !== startingLocationIndex);
-      const allPermutations = permute(permutationIndices);
+    const selectedIndices = selectedLocations.map((loc) => locations.indexOf(loc));
+    if (selectedIndices.length > 1) {
+      // Generate all permutations of the selected locations
+      const allPermutations = permute(selectedIndices);
 
       // Initialize the shortest distance and shortest path
       let minDistance = Infinity;
@@ -68,38 +72,33 @@ const App = () => {
 
       // Iterate through all permutations
       allPermutations.forEach((perm) => {
-        // Insert the selected location index at the beginning
-        const path = [startingLocationIndex, ...perm.slice(0, numPlacesToVisit - 1)]; // Add the starting location and the required number of places
-        const totalDistance = calculateTotalDistance(path);
+        const totalDistance = calculateTotalDistance(perm);
         if (totalDistance < minDistance) {
           minDistance = totalDistance;
-          minPath = path;
+          minPath = perm;
         }
       });
 
       // Set the shortest path
       setShortestPath(minPath);
     } else {
-      alert('Please select a valid location from the list.');
+      alert('Please select at least two locations.');
     }
   };
 
   // Function to format the output in the desired narrative-like format
- // Function to format the output in the desired narrative-like format
-// Function to format the output in the desired narrative-like format
-const formatPathDescription = (path) => {
-  const formattedPath = [];
-  const averageSpeed = 25; // Average speed in km/h
+  const formatPathDescription = (path) => {
+    const formattedPath = [];
+    const averageSpeed = 25; // Average speed in km/h
 
-  for (let i = 0; i < path.length; i++) {
-    const location = locations[path[i]];
-    const nextLocation = locations[path[i + 1]] || 'Its Final Destination';
-    const distance = calculateTotalDistance([path[i], path[i + 1]]) || 0;
-    const timeInHours = distance / averageSpeed;
-    const timeInMinutes = timeInHours * 60; // Convert hours to minutes
+    for (let i = 0; i < path.length; i++) {
+      const location = locations[path[i]];
+      const nextLocation = locations[path[i + 1]] || 'Its Final Destination';
+      const distance = i < path.length - 1 ? DistanceMatrix[path[i]][path[i + 1]] : 0;
+      const timeInHours = distance / averageSpeed;
+      const timeInMinutes = timeInHours * 60; // Convert hours to minutes
 
-    formattedPath.push(
-      <div>
+      formattedPath.push(
         <div key={i} className="transition-card">
           <h3>{location}</h3>
           <div className="tt" style={{ position: 'relative' }}>
@@ -109,50 +108,54 @@ const formatPathDescription = (path) => {
               className="location-image"
             />
           </div>
-        </div>
-        <div key={i} className="transition-card">
-          <p>Next: {nextLocation}</p>
-          <p>Distance: {distance} km</p>
-          <p>Approx.Travel Time: {timeInMinutes.toFixed(0)} mins</p> {/* Display time in minutes */}
-        </div>
-      </div>
-    );
-  }
-
-  return formattedPath;
-};
-
-
-
-  return (
-    <div>
-      <nav className="navbar">
-        <h1>Path Planner</h1>
-      </nav>
-      <div className="container">
-        <div>
-          Select a location
-          <select value={selectedLocation} onChange={(e) => setSelectedLocation(e.target.value)}>
-            <option value="">Select a location</option>
-            {locations.map((location, index) => (
-              <option key={index} value={location}>{location}</option>
-            ))}
-          </select>
-          <br />
-          No of locations need to visit
-          <select value={numPlacesToVisit} onChange={(e) => setNumPlacesToVisit(parseInt(e.target.value))}>
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((num, index) => (
-              <option key={index} value={num}>{num}</option>
-            ))}
-          </select>
-          <button onClick={findShortestPath}>Find Best Path</button>
-          {shortestPath.length > 0 && (
-            <div className="path-container">
-              <h2>Best Path from {selectedLocation}:</h2>
-              <div className="path">{formatPathDescription(shortestPath)}</div>
+          {i < path.length - 1 && (
+            <div className="transition-card">
+              <p>
+                Distance to {nextLocation}: {distance} km
+              </p>
+              <p>
+                Approximate Time: {timeInMinutes.toFixed(0)} minutes
+              </p>
             </div>
           )}
         </div>
+      );
+    }
+    return formattedPath;
+  };
+
+  return (
+    <div>
+      <div className="navbar">
+        <h1>Kochi Tourist Route Planner</h1>
+      </div>
+      <div className="container">
+        <h2>Select Locations to Visit</h2>
+        <div className="locations-grid">
+          {locations.map((location, index) => (
+            <div
+              key={index}
+              className={`location-card ${selectedLocations.includes(location) ? 'selected' : ''}`}
+              onClick={() => handleLocationClick(location)}
+            >
+              <img
+                src={`${process.env.PUBLIC_URL}/${location}.jpg`} // Use backticks for string interpolation
+                alt={location}
+                className="location-image"
+              />
+              <p>{location}</p>
+            </div>
+          ))}
+        </div>
+        <button onClick={findShortestPath}>Find Best Path</button>
+        {shortestPath.length > 0 && (
+          <div className="path-container">
+            <h2>Best Path to Follow</h2>
+            <div className="path">
+              {formatPathDescription(shortestPath)}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
